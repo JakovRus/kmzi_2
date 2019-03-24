@@ -6,7 +6,7 @@ from random_excursions import random_excursions
 test_name = sys.argv[1]
 file_name = sys.argv[2]
 
-content = open(file_name, "r").read()
+content = open('./data/' + file_name, "r").read()
 
 if test_name == 'rank':
     p_value = matrix_rank(content)

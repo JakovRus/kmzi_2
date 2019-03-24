@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "pip install numpy && pip install scipy",
+    "rank": "cd tests && python tests.py rank",
+    "cumsum": "cd tests && python tests.py cumsum",
+    "excursions": "cd tests && python tests.py excursions",
+    "generator": "node index.js"
   },
   "author": "",
   "license": "ISC"
