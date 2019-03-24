@@ -1,8 +1,5 @@
 #! /usr/bin/env node
-const fs = require("fs");
-const LFSR = require("./generator/generator");
-
-
+const performAction = require("./utils");
 const [,, ...args] = process.argv;
 
 const params = {
@@ -13,40 +10,9 @@ const params = {
 } 
 
 args.forEach((arg, index, array) => {
-  switch (arg) {
-    case 'action': {
-      params.action = array[index + 1];
-      break;
-    };
-    case 'pattern': {
-      params.pattern = array[index + 1];
-      break;
-    };
-    case 'seed': {
-      params.seed = array[index + 1];
-      break;
-    }
-    case 'length': {
-      params.length = array[index + 1];
-      break;
-    }
+  if(arg in params) {
+  	params[arg] = array[index + 1];
   }
-})
+});
 
-const generator = new LFSR(params.seed, params.pattern);
-
-function generate() {
-	const sequence = generator.generate(params.length);
-	fs.writeFileSync('./tests/data/generated_sequence.txt', sequence);
-}
-
-switch (params.action) {
-	case 'generate': {
-		generate();
-		break;
-	};
-	case 'computeLength': {
-		console.log(generator.getSequenceLength());
-		break;
-	}
-}
+performAction(params);
