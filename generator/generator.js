@@ -1,18 +1,5 @@
-const utils = require("./generator-utils");
-
-class LFSR {
-	constructor(seed, patternNumber) {
-		this.pattern = parseInt(utils.patterns[patternNumber], 2);
-		this.patternLength = utils.patterns[patternNumber].length - 1;
-  	this.register = seed & utils.generateMask(this.patternLength);
-	}
-
-  shift() {
-		let cusum = utils.getCusum(this.register, this.pattern);
-		const mask = utils.generateMask(this.patternLength);
-		this.register =	(this.register >> 1 | cusum << this.patternLength - 1);
-		return cusum;
-	};
+class Generator {
+	shift() {}
 
 	generate(length) {
 		let sequence = '';
@@ -21,23 +8,9 @@ class LFSR {
 		}
 
 		return sequence;
-	};	
-
-	getSequenceLength() {
-		const initialReister = this.register;
-		let length = 0;
-
-		do {
-			this.shift();
-			length++;
-			if(length > 16777215) {
-				console.log('return');	
-				return length;
-			}
-		} while(initialReister !== this.register);
-
-		return length;
-	}
+	};
+	
+	get length() {}
 }
 
-module.exports = LFSR;
+module.exports = Generator;

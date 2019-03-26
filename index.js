@@ -4,8 +4,6 @@ const [,, ...args] = process.argv;
 
 const params = {
 	action: 'generate',
-	pattern: 2,
-	seed: 2502002,
 	length: 1000000
 } 
 
