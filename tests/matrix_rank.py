@@ -32,15 +32,11 @@ def matrix_rank(bin_data: str, matrix_size=32):
             block_start += block_size
             block_end += block_size
 
-        piks = [1.0, 0.0, 0.0]
-        for x in range(1, 50):
-            piks[0] *= 1 - (1.0 / (2 ** x))
-        piks[1] = 2 * piks[0]
-        piks[2] = 1 - piks[0] - piks[1]
+        coeffs =  [0.2887880950866029, 0.5775761901732058, 0.1336357147401913]
 
         chi = 0.0
-        for i in range(len(piks)):
-            chi += pow((max_ranks[i] - piks[i] * num_m), 2.0) / (piks[i] * num_m)
+        for i in range(len(coeffs)):
+            chi += pow((max_ranks[i] - coeffs[i] * num_m), 2.0) / (coeffs[i] * num_m)
         p_val = math.exp(-chi / 2)
         return p_val
     else:
